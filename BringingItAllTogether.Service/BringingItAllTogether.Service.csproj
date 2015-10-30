@@ -71,14 +71,6 @@
       <Project>{5083061E-3293-4A0B-8B18-78DD3B1FA97B}</Project>
       <Name>BringingItAllTogether.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DependencyInjection.Core\DependencyInjection.Core.csproj">
-      <Project>{624694d1-4a1e-42e2-8e9a-bc8a522981d2}</Project>
-      <Name>DependencyInjection.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DependencyInjection.Data\DependencyInjection.Data.csproj">
-      <Project>{6253301f-739c-4170-8d2d-c8fe7f04a13e}</Project>
-      <Name>DependencyInjection.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
