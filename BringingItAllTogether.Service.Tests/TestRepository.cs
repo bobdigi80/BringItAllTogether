@@ -7,9 +7,12 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BringingItAllTogether.Interfaces;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace BringingItAllTogether.Service.Tests
 {
+    [TestClass]  
     public class TestRepository<T> : IRepository<T> where T : BaseEntity
     {
         private List<T> repository;
@@ -39,7 +42,7 @@ namespace BringingItAllTogether.Service.Tests
         {
             return repository.Find((Predicate<T>) id);
         }
-
+        
         public void Insert(T entity)
         {
             repository.Add(entity);
