@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -46,8 +47,22 @@ namespace BringingItAllTogether.Controllers
         }
 
         // PUT: api/Package/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, Package packagepara)
         {
+            Package package = _packageService.GetPackage(id);
+            package.Title = packagepara.Title;
+            package.Description = packagepara.Description;
+            package.Location = packagepara.Location;
+            try
+            {
+                _packageService.UpdatePackage(package);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // DELETE: api/Package/5

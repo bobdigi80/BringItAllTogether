@@ -11,6 +11,7 @@ function Package(id, title, description, location) {
     self.Title = ko.observable(title);
     self.Description = ko.observable(description);
     self.Location = ko.observable(location);
+    self.isEdit = ko.observable(false);
    
     self.addPackage = function () {
         var dataObject = ko.toJSON(this);
@@ -35,6 +36,7 @@ function Package(id, title, description, location) {
 // use as student list view's view model
 function PackageList() {
     var self = this;
+    var saveState = {};
     // observable arrays are update binding elements upon array changes
     self.packages = ko.observableArray([]);
 
@@ -60,6 +62,43 @@ function PackageList() {
             }
         });
     };
+
+    self.updatePackage = function (selectedPackage) {
+        //get the student details
+        var id = selectedPackage.Id();
+        var title = selectedPackage.Title();
+        var description = selectedPackage.Description();
+        var location = selectedPackage.Location();
+
+        //build the data
+        var thispackage = { 'Id': id, 'Title': title, 'Description': description, 'Location': location };
+
+        //submit to server via POST
+        $.ajax({
+            url: '/api/package/' + selectedPackage.Id(),
+            type: "PUT",
+            contentType: 'application/json',
+            dataType: "json",
+            data: ko.toJSON(thispackage),
+            success: function () {
+                selectedPackage.isEdit(false);
+            },
+            error: function (xhr, textStatus, error) {
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+            }
+        });
+    };
+    self.EditPackage = function (model, event) {
+        saveState.Title = model.Title();
+        model.isEdit(true);
+    };
+    self.CancelPackage = function (model, event) {
+        model.Title(saveState.Title);
+        model.isEdit(false);
+    };
+
 }
 
 // create index view view model which contain two models for partial views
