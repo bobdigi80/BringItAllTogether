@@ -19,6 +19,11 @@ namespace BringingItAllTogether.Service
            _packageRepository = packageRepository;
        }
 
+        public Package FindByTitle(string title)
+        {
+            return _packageRepository.Table.FirstOrDefault(x => x.Title == title);
+        }
+
         public IQueryable<Package> GetPackages()
         {
             return _packageRepository.Table;
@@ -31,6 +36,11 @@ namespace BringingItAllTogether.Service
 
         public void InsertPackage(Package package)
         {
+            //if (package.ModifiedDate < DateTime.UtcNow.Date)
+            //{
+            //    throw new Exception("Invalid modification date.");
+            //}
+            
             _packageRepository.Insert(package);
         }
 

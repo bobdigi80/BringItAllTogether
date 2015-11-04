@@ -14,9 +14,9 @@
             <td><span id="spnDescription" data-bind="text: Description, visible: !isEdit()"></span><input id="inpDescription" type="text" class="form-control" data-bind="value: Description, visible: isEdit()" /></td>
             <td><span id="spnLocation" data-bind="text: Location, visible: !isEdit()"></span><input id="inpLocation" type="text" class="form-control" data-bind="value: Location, visible: isEdit()" /></td>
             <td data-bind="visible: !isEdit()"><input type="button" class="btn btn-danger btn-xs" value=" [e] edit " data-bind="click: $parent.EditPackage" /></td>
-            <td data-bind="visible: !isEdit()"><input type="button" class="btn btn-danger btn-xs" value=" [x] delete " data-bind="click: $parent.DeletePackage" /></td>
+            <td data-bind="visible: !isEdit()"><input type="button" class="btn btn-danger btn-xs" value=" [x] delete " data-bind="click: $parent.removePackage" /></td>
             <td data-bind="visible: isEdit"><input type="button" class="btn btn-danger btn-xs" value=" [e] update " data-bind="click: $parent.updatePackage" /></td>
-            <td data-bind="visible: isEdit"><input type="button" class="btn btn-danger btn-xs" value=" [x] cancel " data-bind="click: $parent.removePackage" /></td>
+            <td data-bind="visible: isEdit"><input type="button" class="btn btn-danger btn-xs" value=" [x] cancel " data-bind="click: $parent.CancelPackage" /></td>
         </tr>
     </tbody>
 </table>

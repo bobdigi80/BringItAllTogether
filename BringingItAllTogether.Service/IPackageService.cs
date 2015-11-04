@@ -11,5 +11,6 @@ namespace BringingItAllTogether.Service
         void InsertPackage(Package package);
         void UpdatePackage(Package package);
         void DeletePackage(Package package);
+        Package FindByTitle(string title);
     }
 }

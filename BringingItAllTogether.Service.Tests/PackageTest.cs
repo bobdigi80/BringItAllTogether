@@ -44,5 +44,31 @@ namespace BringingItAllTogether.Service.Tests
             service.InsertPackage(package);
             Assert.IsNotNull(service.FindByTitle("test"));
         }
+
+        [TestMethod]
+        public void Test_When_Update_with_Valid_Expiration_Save()
+        {
+            var service = new PackageService(new Repository<Package>(new IocDbContext()));
+            var package = new Package()
+            {
+                Title = "test",
+                Description = "test12",
+                Location = "stafford",
+                ModifiedDate = DateTime.Now.AddDays(10)
+            };
+
+            service.InsertPackage(package);
+
+            var newpackage = new Package()
+            {
+                Title = "tester",
+                Description = "test12",
+                Location = "stafford"
+            };
+            service.UpdatePackage(newpackage);
+            Assert.IsNotNull(service.FindByTitle("tester"));
+        }
+
+
     }
 }

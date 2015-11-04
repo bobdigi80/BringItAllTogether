@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using BringingItAllTogether.Core;
+using BringingItAllTogether.Core.Data;
 using BringingItAllTogether.Interfaces;
 
 namespace BringingItAllTogether.Data
@@ -16,13 +17,13 @@ namespace BringingItAllTogether.Data
         {
             _context = context;
         }
-
-        public T GetById(object id)
-        {
-            return Entities.Find(id);
-        }
-
-        public void Insert(T entity)
+       
+       public T GetById(object id)
+       {
+           return Entities.Find(id);
+       }
+       
+       public void Insert(T entity)
         {
             try
             {
@@ -112,7 +113,7 @@ namespace BringingItAllTogether.Data
                 return Entities;
             }
         }
-
+       
         private IDbSet<T> Entities
         {
             get
