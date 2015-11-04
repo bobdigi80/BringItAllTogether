@@ -7,12 +7,15 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using BringingItAllTogether.Core.Data;
+using BringingItAllTogether.Filters;
+using BringingItAllTogether.Interfaces;
 using BringingItAllTogether.Models;
 using BringingItAllTogether.Service;
 using Ninject;
 
 namespace BringingItAllTogether.Controllers
 {
+    [ApiAuthenticationFilter]
     public class PackageController : ApiController
     {
         [Inject]

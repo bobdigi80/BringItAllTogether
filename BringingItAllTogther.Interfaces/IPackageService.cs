@@ -2,7 +2,7 @@
 using BringingItAllTogether.Core.Data;
 using BringingItAllTogether.Interfaces;
 
-namespace BringingItAllTogether.Service
+namespace BringingItAllTogether.Interfaces
 {
     public interface IPackageService
     {
