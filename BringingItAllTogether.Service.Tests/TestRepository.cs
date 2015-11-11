@@ -26,7 +26,12 @@ namespace BringingItAllTogether.Service.Tests
         }
 
         #region IRepository<T> Members
-        
+
+        public void Delete(object id)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void Delete(T entity)
         {
             repository.Remove(entity);
@@ -37,7 +42,12 @@ namespace BringingItAllTogether.Service.Tests
             repository.Remove(entity);
             repository.Add(entity);
         }
-        
+
+        public IEnumerable<T> Get()
+        {
+            throw new NotImplementedException();
+        }
+
         public T GetById(object id)
         {
             return repository.Find((Predicate<T>) id);
@@ -51,6 +61,51 @@ namespace BringingItAllTogether.Service.Tests
         public IQueryable<T> Table
         {
             get { return Entities; }
+        }
+
+        public IEnumerable<T> GetMany(Func<T, bool> @where)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<T> GetManyQueryable(Func<T, bool> @where)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get(Func<T, bool> @where)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Func<T, bool> @where)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<T> GetWithInclude(Expression<Func<T, bool>> predicate, params string[] include)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Exists(object primaryKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T GetSingle(Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T GetFirst(Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         private IDbSet<T> Entities

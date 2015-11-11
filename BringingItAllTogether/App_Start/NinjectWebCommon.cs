@@ -78,6 +78,7 @@ namespace BringingItAllTogether
             kernel.Bind(typeof(IRepository<>)).To(typeof(Repository<>));
             kernel.Bind<IDbContext>().To<IocDbContext>().InSingletonScope();
             kernel.Bind<IUserServices>().To<UserServices>().InSingletonScope();
+            kernel.Bind<ITokenServices>().To<TokenServices>().InSingletonScope();
         }   
     }
 }

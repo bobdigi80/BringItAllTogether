@@ -16,7 +16,7 @@ namespace BringingItAllTogether.Data.UnitOfWork
         private readonly IocDbContext _context = null;
         private Repository<User> _userRepository;
         //private GenericRepository<Product> _productRepository;
-        //private GenericRepository<Token> _tokenRepository;
+        private Repository<Token> _tokenRepository;
         #endregion
 
         public UnitOfWork()
@@ -31,6 +31,17 @@ namespace BringingItAllTogether.Data.UnitOfWork
         {
             get { return _userRepository ?? (_userRepository = new Repository<User>(_context)); }
         }
+
+        /// <summary>
+        /// Get/Set Property for user repository.
+        /// </summary>
+        public Repository<Token> TokenRepository
+        {
+            get { return _tokenRepository ?? (_tokenRepository = new Repository<Token>(_context)); }
+        }
+
+
+
 
         public void Save()
         {
