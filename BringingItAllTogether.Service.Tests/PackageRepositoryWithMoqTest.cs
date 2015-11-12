@@ -1,6 +1,7 @@
 ﻿using System;
 using BringingItAllTogether.Core.Data;
 using BringingItAllTogether.Data;
+using BringingItAllTogether.Data.UnitOfWork;
 using BringingItAllTogether.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -21,8 +22,8 @@ namespace BringingItAllTogether.Service.Tests
                 ModifiedDate = DateTime.Now.AddDays(-5)
             };
 
-            var repositoryMock = new Mock<IRepository<Package>>();
-            repositoryMock.Setup(x => x.Insert(package));
+            var repositoryMock = new Mock<UnitOfWork>();
+            repositoryMock.Setup(x => x.PackageRepository.Insert(package));
 
             var repository = new PackageService(repositoryMock.Object);
 
@@ -40,14 +41,14 @@ namespace BringingItAllTogether.Service.Tests
                 ModifiedDate = DateTime.Now.AddDays(10)
             };
 
-            var repositoryMock = new Mock<IRepository<Package>>();
-            repositoryMock.Setup(x => x.Insert(package));
+            var repositoryMock = new Mock<UnitOfWork>();
+            repositoryMock.Setup(x => x.PackageRepository.Insert(package));
 
             var repository = new PackageService(repositoryMock.Object);
 
             repository.InsertPackage(package);
 
-            repositoryMock.Verify(x => x.Insert(package), Times.Once);
+            repositoryMock.Verify(x => x.PackageRepository.Insert(package), Times.Once);
         }
     }
 }

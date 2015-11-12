@@ -47,7 +47,7 @@ namespace BringingItAllTogether.Controllers
         // GET: api/Package/5
         public HttpResponseMessage Get(int id)
         {
-            if (id != null)
+            if (id > 0)
             {
                 var product = _packageService.GetPackage(id);
                 if (product != null)

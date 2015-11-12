@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using BringingItAllTogether.Core.Data;
 using BringingItAllTogether.Data;
+using BringingItAllTogether.Data.UnitOfWork;
 using BringingItAllTogether.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -16,7 +17,7 @@ namespace BringingItAllTogether.Service.Tests
         [ExpectedException(typeof(Exception))]
         public void Test_When_Save_With_Invalid_Date_Throw_Exception()
         {
-            var service = new PackageService(new Repository<Package>(new IocDbContext()));
+            var service = new PackageService(new UnitOfWork());
 
             var package = new Package()
             {
@@ -25,14 +26,13 @@ namespace BringingItAllTogether.Service.Tests
                 Location = "stafford",
                 ModifiedDate = DateTime.Now.AddDays(-5)
             };
-
             service.InsertPackage(package);
         }
 
         [TestMethod]
         public void Test_When_Save_with_Valid_Expiration_Save()
         {
-            var service = new PackageService(new Repository<Package>(new IocDbContext()));
+            var service = new PackageService(new UnitOfWork());
             var package = new Package()
             {
                 Title = "test",
@@ -48,7 +48,7 @@ namespace BringingItAllTogether.Service.Tests
         [TestMethod]
         public void Test_When_Update_with_Valid_Expiration_Save()
         {
-            var service = new PackageService(new Repository<Package>(new IocDbContext()));
+            var service = new PackageService(new UnitOfWork());
             var package = new Package()
             {
                 Title = "test",
@@ -68,7 +68,5 @@ namespace BringingItAllTogether.Service.Tests
             service.UpdatePackage(newpackage);
             Assert.IsNotNull(service.FindByTitle("tester"));
         }
-
-
     }
 }
