@@ -1,7 +1,9 @@
-﻿using System.Web.Script.Serialization;
+﻿using System.Net;
+using System.Web.Script.Serialization;
 using System.Data;
 using System.Collections.Generic;
 using System;
+using BringingItAllTogether.ErrorHelper;
 
 namespace BringingItAllTogether.Helpers
 {
@@ -22,7 +24,7 @@ namespace BringingItAllTogether.Helpers
             }
             catch (Exception ex)
             {
-                return "";
+                 throw new ApiBusinessException(1002, ex.Message, HttpStatusCode.NoContent);
             }
         }
         #endregion

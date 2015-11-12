@@ -30,7 +30,7 @@ namespace BringingItAllTogether.Service
             {
                 using (var scope = new TransactionScope())
                 {
-                    var product = _unitOfWork.PackageRepository.GetById(packageId));
+                    var product = _unitOfWork.PackageRepository.GetById(packageId);
                     if (product != null)
                     {
 
