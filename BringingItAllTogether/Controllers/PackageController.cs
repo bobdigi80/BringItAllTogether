@@ -9,6 +9,7 @@ using System.Web.Http;
 using AttributeRouting.Web.Http;
 using BringingItAllTogether.ActionFilter;
 using BringingItAllTogether.Core.Data;
+using BringingItAllTogether.ErrorHelper;
 using BringingItAllTogether.Filters;
 using BringingItAllTogether.Interfaces;
 using BringingItAllTogether.Models;
@@ -40,13 +41,20 @@ namespace BringingItAllTogether.Controllers
             var packages = _packageService.GetPackages();
             if (packages.Any())
                 return Request.CreateResponse(HttpStatusCode.OK, packages);
-            return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Packages not found");
+            throw new ApiDataException(1000, "Packages not found", HttpStatusCode.NotFound);
         }
 
         // GET: api/Package/5
-        public Package Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return _packageService.GetPackage(id); 
+            if (id != null)
+            {
+                var product = _packageService.GetPackage(id);
+                if (product != null)
+                    return Request.CreateResponse(HttpStatusCode.OK, product);
+                throw new ApiDataException(1001, "No product found for this id.", HttpStatusCode.NotFound);
+            }
+            throw new ApiException() { ErrorCode = (int)HttpStatusCode.BadRequest, ErrorDescription = "Bad Request..." };
         }
 
         // POST: api/Package
@@ -61,31 +69,28 @@ namespace BringingItAllTogether.Controllers
         }
 
         // PUT: api/Package/5
-        public HttpResponseMessage Put(int id, Package packagepara)
+        public bool Put(int id, Package packagepara)
         {
-            Package package = _packageService.GetPackage(id);
-            package.Title = packagepara.Title;
-            package.Description = packagepara.Description;
-            package.Location = packagepara.Location;
-            try
+             if (id > 0)
             {
-                _packageService.UpdatePackage(package);
+                return _packageService.UpdatePackage(id, packagepara);
             }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return false;
         }
 
         // DELETE: api/Package/5
-        public HttpResponseMessage Delete(int id)
+        public bool Delete(int id)
         {
-            var packageEntity = _packageService.GetPackage(id);
-            _packageService.DeletePackage(packageEntity);
-            var response = Request.CreateResponse(HttpStatusCode.OK, packageEntity);
-            return response;
+            if (id > 0)
+            {
+                var isSuccess = _packageService.DeletePackage(id);
+                if (isSuccess)
+                {
+                    return isSuccess;
+                }
+                throw new ApiDataException(1002, "Package is already deleted or not exist in system.", HttpStatusCode.NoContent);
+            }
+            throw new ApiException() { ErrorCode = (int)HttpStatusCode.BadRequest, ErrorDescription = "Bad Request..." };
         }
    }
 }

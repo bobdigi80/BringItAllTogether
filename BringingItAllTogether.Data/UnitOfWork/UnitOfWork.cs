@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BringingItAllTogether.Core.Data;
 
 namespace BringingItAllTogether.Data.UnitOfWork
@@ -16,7 +13,9 @@ namespace BringingItAllTogether.Data.UnitOfWork
         private readonly IocDbContext _context = null;
         private Repository<User> _userRepository;
         //private GenericRepository<Product> _productRepository;
+        private Repository<Package> _packageRepository;
         private Repository<Token> _tokenRepository;
+
         #endregion
 
         public UnitOfWork()
@@ -40,7 +39,13 @@ namespace BringingItAllTogether.Data.UnitOfWork
             get { return _tokenRepository ?? (_tokenRepository = new Repository<Token>(_context)); }
         }
 
-
+        /// <summary>
+        /// Get/Set Property for product repository.
+        /// </summary>
+        public Repository<Package> PackageRepository
+        {
+            get { return _packageRepository ?? (_packageRepository = new Repository<Package>(_context)); }
+         }
 
 
         public void Save()

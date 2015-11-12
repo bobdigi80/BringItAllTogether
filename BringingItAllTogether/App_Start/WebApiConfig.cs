@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using BringingItAllTogether.ActionFilter;
 using BringingItAllTogether.Filters;
 
 namespace BringingItAllTogether
@@ -14,6 +15,7 @@ namespace BringingItAllTogether
             config.MapHttpAttributeRoutes();
 
             config.Filters.Add(new ApiAuthenticationFilter());
+            config.Filters.Add(new LoggingFilterAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

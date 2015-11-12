@@ -79,6 +79,7 @@ namespace BringingItAllTogether
             kernel.Bind<IDbContext>().To<IocDbContext>().InSingletonScope();
             kernel.Bind<IUserServices>().To<UserServices>().InSingletonScope();
             kernel.Bind<ITokenServices>().To<TokenServices>().InSingletonScope();
+
         }   
     }
 }

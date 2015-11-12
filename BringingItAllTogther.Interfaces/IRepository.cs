@@ -25,5 +25,6 @@ namespace BringingItAllTogether.Interfaces
         bool Exists(object primaryKey);
         T GetSingle(Func<T, bool> predicate);
         T GetFirst(Func<T, bool> predicate);
+
     }
 }
