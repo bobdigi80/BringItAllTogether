@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
-using AttributeRouting.Web.Http;
-using BringingItAllTogether.ActionFilter;
 using BringingItAllTogether.Core.Data;
 using BringingItAllTogether.ErrorHelper;
-using BringingItAllTogether.Filters;
 using BringingItAllTogether.Interfaces;
-using BringingItAllTogether.Models;
-using BringingItAllTogether.Service;
+
 using Ninject;
 
 namespace BringingItAllTogether.Controllers
@@ -33,9 +26,7 @@ namespace BringingItAllTogether.Controllers
         //{
         //    return _packageService.GetPackages();
         //}
-
-        [GET("allpackages")]
-        [GET("all")]
+        
         public HttpResponseMessage Get()
         {
             var packages = _packageService.GetPackages();

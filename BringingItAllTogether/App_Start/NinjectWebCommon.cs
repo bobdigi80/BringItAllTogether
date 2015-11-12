@@ -9,7 +9,6 @@ using BringingItAllTogether.Service;
 using Ninject.Activation;
 using Ninject.Parameters;
 using Ninject.Syntax;
-using Ninject.Web.WebApi;
 using IDependencyResolver = System.Web.Http.Dependencies.IDependencyResolver;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(BringingItAllTogether.NinjectWebCommon), "Start")]

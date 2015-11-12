@@ -6,7 +6,6 @@ using System.Web.Http.Filters;
 using System.Web.Http;
 using System.Web.Http.Tracing;
 using BringingItAllTogether.Helpers;
-using BringingItAllTogether.Helpers;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Net;
