@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using AttributeRouting.Web.Http;
+using BringingItAllTogether.ActionFilter;
 using BringingItAllTogether.Core.Data;
 using BringingItAllTogether.Filters;
 using BringingItAllTogether.Interfaces;
@@ -15,7 +17,6 @@ using Ninject;
 
 namespace BringingItAllTogether.Controllers
 {
-    [ApiAuthenticationFilter]
     public class PackageController : ApiController
     {
         [Inject]
@@ -27,9 +28,19 @@ namespace BringingItAllTogether.Controllers
         }
 
        // GET: api/Package
-        public IEnumerable<Package> Get()
+        //public IEnumerable<Package> Get()
+        //{
+        //    return _packageService.GetPackages();
+        //}
+
+        [GET("allpackages")]
+        [GET("all")]
+        public HttpResponseMessage Get()
         {
-            return _packageService.GetPackages();
+            var packages = _packageService.GetPackages();
+            if (packages.Any())
+                return Request.CreateResponse(HttpStatusCode.OK, packages);
+            return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Packages not found");
         }
 
         // GET: api/Package/5
